@@ -22,78 +22,52 @@ class ShellScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
     final currentIndex = _indexForLocation(location);
-    return PopScope(
-      canPop: currentIndex == 0,
-      onPopInvokedWithResult: (didPop, result) {
-        if (!didPop && currentIndex != 0) {
-          context.go('/');
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          leading: Navigator.of(context).canPop()
-              ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop())
-              : null,
-          title: const Text('Binayak Medicine Store'),
-          actions: [
-            IconButton(
-              onPressed: () => Scaffold.of(context).openEndDrawer(),
-              icon: const Icon(Icons.menu),
-              tooltip: 'Menu',
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Binayak Medicine Store'),
+        actions: [
+          IconButton(
+            onPressed: () => Scaffold.of(context).openEndDrawer(),
+            icon: const Icon(Icons.menu),
+            tooltip: 'Menu',
+          ),
+        ],
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(radius: 28, child: Icon(Icons.local_pharmacy)),
+                  SizedBox(height: 8),
+                  Text('Binayak Medicine Store'),
+                  Text('Owner: Suman Sahu'),
+                  Text('Created by Roshan'),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: const Text('About'),
+              onTap: () => context.go('/about'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings_outlined),
+              title: const Text('Settings'),
+              onTap: () => context.go('/reports'),
             ),
           ],
         ),
-        endDrawer: Drawer(
-          child: ListView(
-            children: [
-              const DrawerHeader(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(radius: 28, child: Icon(Icons.local_pharmacy)),
-                    SizedBox(height: 8),
-                    Text('Binayak Medicine Store'),
-                    Text('Owner: Suman Sahu'),
-                    Text('Created by Roshan'),
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.inventory_2_outlined),
-                title: const Text('Stock Management'),
-                onTap: () => context.go('/stock'),
-              ),
-              ListTile(
-                leading: const Icon(Icons.receipt_long_outlined),
-                title: const Text('New Invoice'),
-                onTap: () => context.go('/invoice'),
-              ),
-              ListTile(
-                leading: const Icon(Icons.qr_code_scanner),
-                title: const Text('Scan Barcode'),
-                onTap: () => context.go('/scan'),
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings_outlined),
-                title: const Text('Settings'),
-                onTap: () => context.go('/settings'),
-              ),
-              ListTile(
-                leading: const Icon(Icons.info_outline),
-                title: const Text('About'),
-                onTap: () => context.go('/about'),
-              ),
-            ],
-          ),
-        ),
-        body: child,
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: currentIndex,
-          onDestinationSelected: (value) => context.go(_destinations[value].$1),
-          destinations: _destinations
-              .map((d) => NavigationDestination(icon: Icon(d.$2), label: d.$3))
-              .toList(),
-        ),
+      ),
+      body: child,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: currentIndex,
+        onDestinationSelected: (value) => context.go(_destinations[value].$1),
+        destinations: _destinations
+            .map((d) => NavigationDestination(icon: Icon(d.$2), label: d.$3))
+            .toList(),
       ),
     );
   }

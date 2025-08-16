@@ -1,8 +1,9 @@
 # Binayak Medicine Store
 
+Owner: Suman Sahu
+
 - App name: Binayak Medicine Store
 - Package id: com.roshan.binayakstore
-- Owner: Suman Sahu
 - Created by: Roshan
 
 This is a personal medicine store manager with AI-powered billing, inventory predictions, barcode scanning, offline/online sync, and professional Material 3 UI built with Riverpod and Clean Architecture.
