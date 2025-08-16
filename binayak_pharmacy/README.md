@@ -1,16 +1,27 @@
-# binayak_pharmacy
+# Binayak Medicine Store
 
-A new Flutter project.
+- App name: Binayak Medicine Store
+- Package id: com.roshan.binayakstore
+- Owner: Suman Sahu
+- Created by: Roshan
 
-## Getting Started
+This is a personal medicine store manager with AI-powered billing, inventory predictions, barcode scanning, offline/online sync, and professional Material 3 UI built with Riverpod and Clean Architecture.
 
-This project is a starting point for a Flutter application.
+## Run
+```bash
+flutter pub get
+cp .env.example .env # set UNIVERSAL_AI_KEY and GEMINI_API_KEY as needed
+flutter run -d chrome # or android/ios device
+```
 
-A few resources to get you started if this is your first Flutter project:
+## AI routing
+- Primary: Universal Key via `UNIVERSAL_AI_KEY`
+- Secondary: Google Gemini 2.0 via `GEMINI_API_KEY`
+The app prioritizes Primary; it automatically falls back to Gemini.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Platforms
+Android, iOS, Web enabled.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Quality
+- Lints: flutter_lints v6
+- Analyzer passes clean.
